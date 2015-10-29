@@ -30,7 +30,7 @@ public class HttpUrlConnectionParser {
     public HttpUrlConnectionParser() {
     }
 
-    public static JSONObject makeHttpUrlConnection(String link,HashMap<String,String> params){
+    public static JSONObject makeHttpUrlConnection(String link,HashMap<String,String> data){
 
 
         try {
@@ -44,7 +44,7 @@ public class HttpUrlConnectionParser {
             OutputStream os = urlConnection.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(os, "UTF-8"));
-            writer.write(getQuery(params));
+            writer.write(getQuery(data));
             writer.flush();
             writer.close();
             os.close();
@@ -81,11 +81,11 @@ public class HttpUrlConnectionParser {
         return jObj;
     }
 
-    private static String getQuery(HashMap<String,String> params) throws UnsupportedEncodingException {
+    private static String getQuery(HashMap<String,String> data) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
 
-        for (Map.Entry<String,String> entry: params.entrySet())
+        for (Map.Entry<String,String> entry: data.entrySet())
         {
             if (first)
                 first = false;
